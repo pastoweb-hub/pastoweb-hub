@@ -1,9 +1,14 @@
+/* 全体のスタイル */
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow: hidden; /* スクロールバーを隠す（必要に応じて変更） */
 }
 
+/* メニューのスタイル */
 .menu {
     position: fixed;
     bottom: 0;
@@ -19,6 +24,7 @@ body {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+/* メニュー表示ボタンのスタイル */
 #toggleMenuButton {
     position: fixed;
     right: 10px;
@@ -32,13 +38,14 @@ body {
     line-height: 24px;
 }
 
+/* スライダーのスタイル */
 #opacitySlider {
     width: 100px;
     margin-left: 10px; /* ボタンとスライダーの間隔 */
     margin-right: 0; /* 不要な右側の余白を削除 */
 }
 
-
+/* カメラ・録画ボタンのスタイル */
 #toggleCameraButton,
 #recordButton {
     margin-left: 0;  /* 左側の余白をなくす */
@@ -49,19 +56,14 @@ body {
     cursor: pointer;
 }
 
+/* コンテナのスタイル */
 .container {
     position: relative;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
 }
 
-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-/* プレビューのスタイル */
+/* ビデオプレビューのスタイル */
 #preview {
     position: fixed;
     bottom: 0;
@@ -70,21 +72,104 @@ video {
     height: 100%;
     z-index: 1; 
     opacity: 1;
+    object-fit: cover;
 }
 
+/* オーバーレイのスタイル */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%; /* オーバーレイが画面全体を覆う */
+    background-color: rgba(255, 255, 255, 0.85); /* 背景はやや透明 */
     padding: 20px;
-    background: rgba(255, 255, 255);
-    z-index: 0;
-    overflow-y: auto;
+    overflow-y: auto; /* 縦方向スクロールを有効に */
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* 見出しのスタイル */
+.overlay h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.overlay h2 {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #444;
+}
+
+.overlay h3 {
+    font-size: 18px;
+    margin-top: 15px;
+    color: #555;
+}
+
+/* 段落のスタイル */
+.overlay p {
+    margin-bottom: 15px;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* 水平線のスタイル */
+.overlay hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
 }
 
 h1, p {
     margin: 0;
     padding: 5px 0;
+}
+
+/* スクロールバーのカスタマイズ */
+.overlay::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overlay::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+}
+
+.overlay::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.overlay::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .overlay {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .overlay h1 {
+        font-size: 20px;
+    }
+
+    .overlay h2 {
+        font-size: 18px;
+    }
+
+    .overlay h3 {
+        font-size: 16px;
+    }
+
+    .menu {
+        padding: 5px;
+    }
+
+    #opacitySlider {
+        width: 80px;
+    }
 }
