@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スマホ2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <video id="preview" autoplay muted playsinline></video>
+        <div class="overlay">
+            <h1>原子の質量を¹²Cの質量の1/12に対する比で表したモノを“相対質量”といいます。</h1>
+            <p>¹²Cの相対質量はピッタリ12。これが基準だから。他の原子の相対質量がピッタリ質量数にならない理由は陽子と中性子の質量が異なることと質量欠損があることです。</p>
+            <p>問）¹²C原子核1個の質量の1/12を1uとする。次のうち正しい等式はどれか</p>
+            <p>①陽子1個の質量=1u
+                ②中性子1個の質量=1u
+                ③12u=陽子6個の質量+中性子6個の質量
+                （答）正しい選択肢はない
+                陽子と中性子の質量は等しくありません。したがって¹²Cの質量の1/12は陽子の質量とも中性子の質量とも一致しません。
+                また、③が正しくない理由は質量欠損があるからです。粒子が結合したものの質量はバラバラの粒子の質量の和より小さくなります。したがって¹²Cの質量は陽子6個と中性子6個の質量の和よりわずかに小さいです。質量欠損について詳しくは高校物理の「原子」で学びます。</p>
+        </div>
+    </div>
+    
+    <div class="menu" id="menu">
+        <button id="toggleCameraButton">🔵</button> <!-- ON/OFFボタンを記号に変更 -->
+        <button id="recordButton">▶️</button> <!-- 録画ボタンを1つにまとめる -->
+        <input type="range" id="opacitySlider" min="0" max="100" value="0">
+    </div>
+    <button id="toggleMenuButton" class="menu-toggle">☰</button>  <!-- メニュー表示/非表示ボタン -->
+    
+
+
+    <script src="script.js"></script>
+</body>
+</html>

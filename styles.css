@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255);
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start; /* 左揃え */
+    align-items: center;
+    z-index: 2;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#toggleMenuButton {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: 4;
+    background: none;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+#opacitySlider {
+    width: 100px;
+    margin-left: 10px; /* ボタンとスライダーの間隔 */
+    margin-right: 0; /* 不要な右側の余白を削除 */
+}
+
+
+#toggleCameraButton,
+#recordButton {
+    margin-left: 0;  /* 左側の余白をなくす */
+    margin-right: 10px;  /* ボタン間の間隔 */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* プレビューのスタイル */
+#preview {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    background: rgba(255, 255, 255);
+    z-index: 0;
+    overflow-y: auto;
+}
+
+h1, p {
+    margin: 0;
+    padding: 5px 0;
+}
