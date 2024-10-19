@@ -73,21 +73,24 @@ body {
     z-index: 1; 
     opacity: 1;
     object-fit: cover;
+    pointer-events: none; /* オーバーレイを無視して、背後を操作可能に */
 }
 
 /* オーバーレイのスタイル */
+/* オーバーレイ全体をクリック不可能に */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* オーバーレイが画面全体を覆う */
-    background-color: rgba(255, 255, 255, 0.85); /* 背景はやや透明 */
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85); /* 背景色は設定 */
     padding: 20px;
-    overflow-y: auto; /* 縦方向スクロールを有効に */
+    overflow-y: auto;
     font-size: 16px;
     box-sizing: border-box;
 }
+
 
 /* 見出しのスタイル */
 .overlay h1 {
@@ -95,6 +98,8 @@ body {
     margin-bottom: 20px;
     color: #333;
     font-weight: bold;
+    pointer-events: auto; /* この部分だけ操作可能にする */
+
 }
 
 .overlay h2 {
