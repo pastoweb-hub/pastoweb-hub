@@ -92,34 +92,91 @@ body {
 }
 
 
-/* 見出しのスタイル */
+/* 見出しの色分け */
 .overlay h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: #2c3e50; /* ダークブルー系の色 */
     font-weight: bold;
-    pointer-events: auto; /* この部分だけ操作可能にする */
-
 }
 
 .overlay h2 {
     font-size: 20px;
     margin-top: 20px;
-    color: #444;
+    color: #34495e; /* 少し明るいブルー系 */
 }
 
 .overlay h3 {
     font-size: 18px;
     margin-top: 15px;
-    color: #555;
+    color: #7f8c8d; /* グレー系 */
 }
 
 /* 段落のスタイル */
 .overlay p {
     margin-bottom: 15px;
-    color: #666;
+    color: #333; /* 濃いグレー */
     line-height: 1.8;
 }
+
+/* リンクのスタイル */
+.overlay a {
+    color: #2980b9; /* 青色のリンク */
+    text-decoration: none;
+}
+
+.overlay a:hover {
+    color: #3498db; /* リンクのホバー時 */
+    text-decoration: underline;
+}
+
+/* 引用部分のスタイル */
+.overlay blockquote {
+    color: #95a5a6; /* 引用部分は薄いグレー */
+    font-style: italic;
+    border-left: 4px solid #bdc3c7; /* 引用に線を追加 */
+    padding-left: 15px;
+    margin: 20px 0;
+}
+
+/* 強調部分のスタイル */
+.overlay strong {
+    color: #c0392b; /* 強調部分は赤色で目立たせる */
+}
+
+/* 箇条書きのスタイル */
+.overlay ul {
+    margin: 15px 0;
+    padding-left: 20px;
+    color: #333;
+}
+
+.overlay ul li {
+    margin-bottom: 10px;
+}
+
+/* 水平線の色 */
+.overlay hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+/* リアルな引用スタイル */
+.overlay q {
+    quotes: "“" "”" "‘" "’"; /* 二重引用符と単一引用符を使用 */
+}
+
+.overlay q:before {
+    content: open-quote;
+}
+
+.overlay q:after {
+    content: close-quote;
+}
+
+
+
 
 /* 水平線のスタイル */
 .overlay hr {
