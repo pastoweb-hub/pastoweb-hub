@@ -4,16 +4,23 @@ const opacitySlider = document.getElementById('opacitySlider');
 const toggleCameraButton = document.getElementById('toggleCameraButton');
 const toggleMenuButton = document.getElementById('toggleMenuButton');
 const menu = document.getElementById('menu');
+const { createClient } = require("webdav");
 
 let mediaRecorder;
 let recordedChunks = [];
 let currentStream;
 let cameraIsOn = true;
-let isRecording = false;  // 録画中かどうかの状態を管理
+let isRecording = false;
 
 // 初めはpreviewを透明に設定
 preview.style.opacity = 0;
 startCamera();
+
+// WebDAVクライアントの設定
+const client = createClient("https://domi.teracloud.jp/dav/", {
+    username: "thigslist",
+    password: "4NXYTc6EPZnuGxpa"
+});
 
 // メニューの表示/非表示を切り替える関数
 toggleMenuButton.addEventListener('click', () => {
@@ -54,9 +61,9 @@ function startCamera(facingMode = "environment") {
         };
 
         mediaRecorder.onstop = async () => {
-            if (recordedChunks.length > 0) {  // チャンクが存在するか確認
+            if (recordedChunks.length > 0) {
                 const recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
-                await downloadRecording(recordedBlob);
+                await uploadRecording(recordedBlob);  // ダウンロードの代わりにアップロード
             } else {
                 alert('録画データがありません');
             }
@@ -100,7 +107,7 @@ function toggleRecording() {
 
     if (!isRecording) {
         if (!mediaRecorder || mediaRecorder.state === "inactive") {
-            mediaRecorder.start(1000);  //１０００ミリ秒ごとにチャンクに保存する
+            mediaRecorder.start(1000);  //1000ミリ秒ごとにチャンクに保存する
             recordButton.textContent = '⏹️';  // 停止ボタンに切り替える
             isRecording = true;
         }
@@ -113,19 +120,16 @@ function toggleRecording() {
     }
 }
 
-// 録画をダウンロードする関数
-function downloadRecording(blob) {
-    const url = URL.createObjectURL(blob);
+// 録画をWebDAVサーバーにアップロードする関数
+async function uploadRecording(blob) {
     const filename = generateFilename();
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 100);
+    try {
+        await client.putFileContents(`/path/to/upload/${filename}`, blob, { overwrite: true });
+        alert(`ファイル ${filename} がアップロードされました。`);
+    } catch (error) {
+        console.error('アップロードに失敗しました:', error);
+        alert('アップロードに失敗しました。');
+    }
 }
 
 // ファイル名を生成する関数
