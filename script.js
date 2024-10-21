@@ -6,21 +6,26 @@ const toggleMenuButton = document.getElementById('toggleMenuButton');
 const menu = document.getElementById('menu');
 const { createClient } = require("webdav");
 
+
+
 let mediaRecorder;
 let recordedChunks = [];
 let currentStream;
 let cameraIsOn = true;
-let isRecording = false;
+let isRecording = false;  // 録画中かどうかの状態を管理
 
 // 初めはpreviewを透明に設定
 preview.style.opacity = 0;
 startCamera();
+
 
 // WebDAVクライアントの設定
 const client = createClient("https://domi.teracloud.jp/dav/", {
     username: "thigslist",
     password: "4NXYTc6EPZnuGxpa"
 });
+
+
 
 // メニューの表示/非表示を切り替える関数
 toggleMenuButton.addEventListener('click', () => {
@@ -61,9 +66,12 @@ function startCamera(facingMode = "environment") {
         };
 
         mediaRecorder.onstop = async () => {
-            if (recordedChunks.length > 0) {
+            if (recordedChunks.length > 0) {  // チャンクが存在するか確認
                 const recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+                // await downloadRecording(recordedBlob);
+
                 await uploadRecording(recordedBlob);  // ダウンロードの代わりにアップロード
+
             } else {
                 alert('録画データがありません');
             }
@@ -120,16 +128,19 @@ function toggleRecording() {
     }
 }
 
-// 録画をWebDAVサーバーにアップロードする関数
-async function uploadRecording(blob) {
+// 録画をダウンロードする関数
+function downloadRecording(blob) {
+    const url = URL.createObjectURL(blob);
     const filename = generateFilename();
-    try {
-        await client.putFileContents(`/path/to/upload/${filename}`, blob, { overwrite: true });
-        alert(`ファイル ${filename} がアップロードされました。`);
-    } catch (error) {
-        console.error('アップロードに失敗しました:', error);
-        alert('アップロードに失敗しました。');
-    }
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
 }
 
 // ファイル名を生成する関数
@@ -153,3 +164,18 @@ toggleCameraButton.addEventListener('click', toggleCamera);
 
 // 初期状態ではメニューを非表示にする場合は、次の行をコメントアウトしてください。
 menu.style.display = 'flex';
+
+
+
+
+// 録画をWebDAVサーバーにアップロードする関数
+async function uploadRecording(blob) {
+    const filename = generateFilename();
+    try {
+        await client.putFileContents(`${filename}`, blob, { overwrite: true });
+        alert(`ファイル ${filename} がアップロードされました。`);
+    } catch (error) {
+        console.error('アップロードに失敗しました:', error);
+        alert('アップロードに失敗しました。');
+    }
+}
