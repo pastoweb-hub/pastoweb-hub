@@ -54,10 +54,15 @@ function startCamera(facingMode = "environment") {
         };
 
         mediaRecorder.onstop = async () => {
-            const recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
-            await downloadRecording(recordedBlob);
+            if (recordedChunks.length > 0) {  // チャンクが存在するか確認
+                const recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+                await downloadRecording(recordedBlob);
+            } else {
+                alert('録画データがありません');
+            }
             recordedChunks = [];
         };
+        
     })
     .catch(error => {
         console.error('カメラの使用に失敗しました:', error);
@@ -95,7 +100,7 @@ function toggleRecording() {
 
     if (!isRecording) {
         if (!mediaRecorder || mediaRecorder.state === "inactive") {
-            mediaRecorder.start();
+            mediaRecorder.start(1000);  //１０００ミリ秒ごとにチャンクに保存する
             recordButton.textContent = '⏹️';  // 停止ボタンに切り替える
             isRecording = true;
         }
