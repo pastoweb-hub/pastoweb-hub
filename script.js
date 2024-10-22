@@ -4,7 +4,6 @@ const opacitySlider = document.getElementById('opacitySlider');
 const toggleCameraButton = document.getElementById('toggleCameraButton');
 const toggleMenuButton = document.getElementById('toggleMenuButton');
 const menu = document.getElementById('menu');
-const { createClient } = require("webdav");
 
 
 
@@ -17,13 +16,6 @@ let isRecording = false;  // 録画中かどうかの状態を管理
 // 初めはpreviewを透明に設定
 preview.style.opacity = 0;
 startCamera();
-
-
-// WebDAVクライアントの設定
-const client = createClient("https://domi.teracloud.jp/dav/", {
-    username: "thigslist",
-    password: "4NXYTc6EPZnuGxpa"
-});
 
 
 
@@ -68,9 +60,8 @@ function startCamera(facingMode = "environment") {
         mediaRecorder.onstop = async () => {
             if (recordedChunks.length > 0) {  // チャンクが存在するか確認
                 const recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
-                // await downloadRecording(recordedBlob);
+                await downloadRecording(recordedBlob);
 
-                await uploadRecording(recordedBlob);  // ダウンロードの代わりにアップロード
 
             } else {
                 alert('録画データがありません');
@@ -167,15 +158,3 @@ menu.style.display = 'flex';
 
 
 
-
-// 録画をWebDAVサーバーにアップロードする関数
-async function uploadRecording(blob) {
-    const filename = generateFilename();
-    try {
-        await client.putFileContents(`${filename}`, blob, { overwrite: true });
-        alert(`ファイル ${filename} がアップロードされました。`);
-    } catch (error) {
-        console.error('アップロードに失敗しました:', error);
-        alert('アップロードに失敗しました。');
-    }
-}

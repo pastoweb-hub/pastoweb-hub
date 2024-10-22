@@ -4,8 +4,9 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #e9f6ec; /* 淡いグリーン背景色に変更 */
     overflow: hidden; /* スクロールバーを隠す（必要に応じて変更） */
+    color: #2c3e50; /* 全体のテキストカラーをダークブルーに */
 }
 
 /* メニューのスタイル */
@@ -14,10 +15,10 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255);
+    background-color: rgba(48, 209, 88, 0.95); /* 基調となる緑色を使用 */
     padding: 5px;
     display: flex;
-    justify-content: flex-start; /* 左揃え */
+    justify-content: flex-start;
     align-items: center;
     z-index: 2;
     box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
@@ -31,7 +32,7 @@ body {
     bottom: 10px;
     z-index: 4;
     background: none;
-    color: #333;
+    color: #ffffff; /* 白に変更 */
     border: none;
     cursor: pointer;
     font-size: 24px;
@@ -41,18 +42,21 @@ body {
 /* スライダーのスタイル */
 #opacitySlider {
     width: 100px;
-    margin-left: 10px; /* ボタンとスライダーの間隔 */
-    margin-right: 0; /* 不要な右側の余白を削除 */
+    margin-left: 10px;
+    margin-right: 0;
+    background-color: #30d158; /* 基調色に合わせる */
+    border-radius: 5px;
 }
 
 /* カメラ・録画ボタンのスタイル */
 #toggleCameraButton,
 #recordButton {
-    margin-left: 0;  /* 左側の余白をなくす */
-    margin-right: 10px;  /* ボタン間の間隔 */
+    margin-left: 0;
+    margin-right: 10px;
     background: none;
     border: none;
     font-size: 24px;
+    color: #ffffff; /* ボタン文字色を白に変更 */
     cursor: pointer;
 }
 
@@ -73,37 +77,36 @@ body {
     z-index: 1; 
     opacity: 1;
     object-fit: cover;
-    pointer-events: none; /* オーバーレイを無視して、背後を操作可能に */
+    pointer-events: none;
 }
 
 /* オーバーレイのスタイル */
-/* オーバーレイ全体をクリック不可能に */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.85); /* 背景色は設定 */
+    background-color: rgba(233, 246, 236, 0.85); /* 淡いグリーンに変更 */
     padding: 20px;
     overflow-y: auto;
     font-size: 16px;
+    color: #2c3e50; /* テキスト色をダークブルーに */
     box-sizing: border-box;
 }
-
 
 /* 見出しの色分け */
 .overlay h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #2c3e50; /* ダークブルー系の色 */
+    color: #30d158; /* 基調色の緑 */
     font-weight: bold;
 }
 
 .overlay h2 {
     font-size: 20px;
     margin-top: 20px;
-    color: #34495e; /* 少し明るいブルー系 */
+    color: #27ae60; /* 明るい緑色に */
 }
 
 .overlay h3 {
@@ -115,33 +118,33 @@ body {
 /* 段落のスタイル */
 .overlay p {
     margin-bottom: 15px;
-    color: #333; /* 濃いグレー */
+    color: #2c3e50; /* 濃いブルーグレー */
     line-height: 1.8;
 }
 
 /* リンクのスタイル */
 .overlay a {
-    color: #2980b9; /* 青色のリンク */
+    color: #30d158; /* 基調色の緑 */
     text-decoration: none;
 }
 
 .overlay a:hover {
-    color: #3498db; /* リンクのホバー時 */
+    color: #27ae60; /* ホバー時は少し明るい緑色 */
     text-decoration: underline;
 }
 
 /* 引用部分のスタイル */
 .overlay blockquote {
-    color: #95a5a6; /* 引用部分は薄いグレー */
+    color: #95a5a6; /* 引用部分はグレーに */
     font-style: italic;
-    border-left: 4px solid #bdc3c7; /* 引用に線を追加 */
+    border-left: 4px solid #30d158; /* 緑色の線を追加 */
     padding-left: 15px;
     margin: 20px 0;
 }
 
 /* 強調部分のスタイル */
 .overlay strong {
-    color: #c0392b; /* 強調部分は赤色で目立たせる */
+    color: #e74c3c; /* 強調部分は赤色 */
 }
 
 /* 箇条書きのスタイル */
@@ -158,13 +161,13 @@ body {
 /* 水平線の色 */
 .overlay hr {
     border: none;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ddd;
     margin: 20px 0;
 }
 
-/* リアルな引用スタイル */
+/* 引用スタイル */
 .overlay q {
-    quotes: "“" "”" "‘" "’"; /* 二重引用符と単一引用符を使用 */
+    quotes: "“" "”" "‘" "’";
 }
 
 .overlay q:before {
@@ -173,21 +176,6 @@ body {
 
 .overlay q:after {
     content: close-quote;
-}
-
-
-
-
-/* 水平線のスタイル */
-.overlay hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
-}
-
-h1, p {
-    margin: 0;
-    padding: 5px 0;
 }
 
 /* スクロールバーのカスタマイズ */
